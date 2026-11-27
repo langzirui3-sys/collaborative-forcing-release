@@ -1,0 +1,202 @@
+{
+  "schema": "erank_frame_artifacts_v1",
+  "status": "frozen",
+  "adapter_module": "cfexp.self_forcing_frame_adapter",
+  "adapter_config": {
+    "schema": "self_forcing_frame_adapter_config_v1",
+    "official_source_commit": "33593df3e81fa3ec10239271dd2c100facac6de1",
+    "source_archive_artifact": "official_self_forcing_source_archive",
+    "source_archive_subdirectory": "Self-Forcing-33593df3e81fa3ec10239271dd2c100facac6de1",
+    "python_wheels": [
+      {
+        "artifact": "flash_attn_wheel",
+        "module": "flash_attn",
+        "version": "2.8.3"
+      }
+    ],
+    "runtime_files": [
+      {
+        "artifact": "wan_model_config",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/config.json"
+      },
+      {
+        "artifact": "wan_model_configuration",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/configuration.json"
+      },
+      {
+        "artifact": "wan_model_weights",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/diffusion_pytorch_model.safetensors"
+      },
+      {
+        "artifact": "wan_vae_checkpoint",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/Wan2.1_VAE.pth"
+      },
+      {
+        "artifact": "wan_t5_checkpoint",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/models_t5_umt5-xxl-enc-bf16.pth"
+      },
+      {
+        "artifact": "umt5_special_tokens_map",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/google/umt5-xxl/special_tokens_map.json"
+      },
+      {
+        "artifact": "umt5_spiece_model",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/google/umt5-xxl/spiece.model"
+      },
+      {
+        "artifact": "umt5_tokenizer_json",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/google/umt5-xxl/tokenizer.json"
+      },
+      {
+        "artifact": "umt5_tokenizer_config",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/google/umt5-xxl/tokenizer_config.json"
+      }
+    ],
+    "generation": {
+      "config_artifact": "self_forcing_config",
+      "checkpoint_artifact": "self_forcing_checkpoint",
+      "checkpoint_state_key": "generator_ema",
+      "dtype": "bfloat16",
+      "noise_shape": [
+        93,
+        16,
+        60,
+        104
+      ],
+      "decoded_frames_before_trim": 369,
+      "output_frames": 360,
+      "expected_blocks": 31,
+      "num_frame_per_block": 3,
+      "independent_first_frame": false,
+      "first_denoising_timestep": 1000,
+      "seed_mode": "reset_per_prompt_full_tensor_before_native_loop",
+      "low_memory": false,
+      "model_id": "self_forcing_1.3b",
+      "required_config_values": {
+        "denoising_step_list": [
+          1000,
+          750,
+          500,
+          250
+        ],
+        "warp_denoising_step": true,
+        "context_noise": 0,
+        "causal": true,
+        "i2v": false,
+        "same_step_across_blocks": true,
+        "num_frame_per_block": 3,
+        "independent_first_frame": false,
+        "model_kwargs.model_name": "Wan2.1-T2V-1.3B",
+        "model_kwargs.timestep_shift": 5.0,
+        "model_kwargs.local_attn_size": 21,
+        "model_kwargs.sink_size": 0
+      }
+    },
+    "musiq": {
+      "checkpoint_artifact": "musiq_spaq_checkpoint",
+      "implementation": "vbench_long_pyiqa_musiq_spaq",
+      "resize_mode": "longer",
+      "raw_score_divisor": 100
+    }
+  },
+  "artifacts": [
+    {
+      "name": "official_self_forcing_source_archive",
+      "root": "model",
+      "path": "source/Self-Forcing-33593df3e81fa3ec10239271dd2c100facac6de1.tar.gz",
+      "sha256": "2ec791e1224511b4b62971a0c236a918d960bdba38676957cfc090b1f85954bf",
+      "role": "official_source_archive"
+    },
+    {
+      "name": "flash_attn_wheel",
+      "root": "model",
+      "path": "runtime-wheels/flash_attn-2.8.3+cu12torch2.5cxx11abiFALSE-cp311-cp311-linux_x86_64.whl",
+      "sha256": "ca5a5614530bad3bcaf936917d53a6d60c9057d1218030efe3ca588cb4f4ebb6",
+      "role": "binary_runtime_wheel"
+    },
+    {
+      "name": "self_forcing_checkpoint",
+      "root": "model",
+      "path": "hf/gdhe17/Self-Forcing/2f8b779212da279d212c22a509b66ad6552f350e/checkpoints/self_forcing_dmd.pt",
+      "sha256": "a0413986d9734e02c09504e1520f5697ba6df731bb2f0f35577485e9cc8f56a3",
+      "role": "generation_checkpoint"
+    },
+    {
+      "name": "self_forcing_config",
+      "root": "repository",
+      "path": "experiments/self-forcing-1.3b-erank-15s.yaml",
+      "sha256": "42b9605fd048096b1eb7681fa1daad542efd34812c170e3305c95dfbf0b8a0fe",
+      "role": "generation_config"
+    },
+    {
+      "name": "wan_model_config",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/config.json",
+      "sha256": "ab37994c43740513f94b3ba6233a784035a67b43c8cde83c8f31aa90468c67ce",
+      "role": "base_model_file"
+    },
+    {
+      "name": "wan_model_configuration",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/configuration.json",
+      "sha256": "745e37f6bb62f8a294ed12e44ffe4733bd2259d6f7029939f1297cd1b226fa4f",
+      "role": "base_model_file"
+    },
+    {
+      "name": "wan_model_weights",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/diffusion_pytorch_model.safetensors",
+      "sha256": "96b6b242ca1c2f24e9d02cd6596066fab6d310e2d7538f33ae267cb18d957e8f",
+      "role": "base_model_file"
+    },
+    {
+      "name": "wan_vae_checkpoint",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/Wan2.1_VAE.pth",
+      "sha256": "38071ab59bd94681c686fa51d75a1968f64e470262043be31f7a094e442fd981",
+      "role": "base_model_file"
+    },
+    {
+      "name": "wan_t5_checkpoint",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/models_t5_umt5-xxl-enc-bf16.pth",
+      "sha256": "7cace0da2b446bbbbc57d031ab6cf163a3d59b366da94e5afe36745b746fd81d",
+      "role": "base_model_file"
+    },
+    {
+      "name": "umt5_special_tokens_map",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/google/umt5-xxl/special_tokens_map.json",
+      "sha256": "7b8a9f5040adb67b5805abdfd42c1f8d0f3d0e711f10726580eb3789cd0ad61d",
+      "role": "base_model_file"
+    },
+    {
+      "name": "umt5_spiece_model",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/google/umt5-xxl/spiece.model",
+      "sha256": "e3909a67b780650b35cf529ac782ad2b6b26e6d1f849d3fbb6a872905f452458",
+      "role": "base_model_file"
+    },
+    {
+      "name": "umt5_tokenizer_json",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/google/umt5-xxl/tokenizer.json",
+      "sha256": "6e197b4d3dbd71da14b4eb255f4fa91c9c1f2068b20a2de2472967ca3d22602b",
+      "role": "base_model_file"
+    },
+    {
+      "name": "umt5_tokenizer_config",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/google/umt5-xxl/tokenizer_config.json",
+      "sha256": "ed9a3a8b0faa71a70a32847e0435fe036e6e112d4df4edb7bb48a921e344dc05",
+      "role": "base_model_file"
+    },
+    {
+      "name": "musiq_spaq_checkpoint",
+      "root": "model",
+      "path": "metrics/musiq/musiq_spaq_ckpt-358bb6af.pth",
+      "sha256": "358bb6af275e28ea56821d44fb55c6cb83645db11f394d3ad65b2d149965ab50",
+      "role": "single_frame_quality_scorer"
+    }
+  ]
+}

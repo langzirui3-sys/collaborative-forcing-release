@@ -1,0 +1,275 @@
+{
+  "rolling-15": {
+    "source_commit": "370b986a257787bbd18fd3763400fc3875daf1c9",
+    "historical_manifest_sha256": "938caf48edc8a3a7d032f128cbe706d286a95580f455b433977b736e1c08e8bd",
+    "runtime": {
+      "backend": "uv",
+      "python": "3.11",
+      "lockfile": "uv.lock"
+    },
+    "resources": {
+      "gpus": 1,
+      "min_gpu_memory_gb": 135,
+      "cpu": 16,
+      "memory_gb": 192,
+      "expected_duration_minutes": 240
+    },
+    "parameters": {
+      "model_pair": "krea_rolling_forcing",
+      "method": "ours",
+      "seed": 20260912,
+      "seconds": 15,
+      "frame_count": 357,
+      "target_root": true,
+      "post_root_target_blocks": 4,
+      "observation_horizon": 8
+    },
+    "entry_module": "cfexp.rolling_budget.paper_main",
+    "options": [
+      "--phase",
+      "main",
+      "--method",
+      "ours",
+      "--duration-seconds",
+      "15"
+    ],
+    "file_arguments": {
+      "--draft-artifact-spec": "erank3-rolling-native-v1.artifacts.json",
+      "--target-artifact-spec": "insight2-krea14b.artifacts.json",
+      "--boundary-config": "paper128-rolling-independent-c10-v1.config.json",
+      "--vbench-checkout": null,
+      "--vbench-python": null,
+      "--vbench-asset-manifest": null,
+      "--vbench-asset-spec": "vbench-long-offline-assets-v1.json"
+    },
+    "environment": {
+      "PYTHONUNBUFFERED": "1",
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1",
+      "CFEXP_INSIGHT2_REQUIRE_CALIBRATION_RECEIPT": "1",
+      "CFEXP_NATIVE_VIDEO_STREAM_MODEL": "rolling",
+      "CFEXP_ACCEPTED_VIDEO_STREAM": "1",
+      "CFEXP_RENDER_TARGET_PRIORITY": "1",
+      "CFEXP_VIDEO_ONLY_DECODE": "1",
+      "CFEXP_VIDEO_ENCODING": "serial_abr_v1",
+      "OMP_NUM_THREADS": "4",
+      "MKL_NUM_THREADS": "4",
+      "CFEXP_ROLLING_JOINT_HANDOFF_DIAGNOSTIC": "1",
+      "CFEXP_SDVG_TRACKING": "1",
+      "CFEXP_STAGE_TIMING": "1",
+      "CFEXP_NATIVE_SINGLE_GPU": "1",
+      "CFEXP_ROLLING_HOST_KV_CURSORS": "0",
+      "CFEXP_ROLLING_HOST_WINDOW": "0",
+      "UV_LINK_MODE": "symlink",
+      "CFEXP_PAPER_REPRODUCTION": "1",
+      "CFEXP_KREA_TIMESTEP_POLICY": "main_comparison_v1",
+      "CFEXP_WANDB_MODE": "auto",
+      "CFEXP_GENERATION_SEED": "20260912",
+      "CFEXP_PAPER_PROMPT_SHARD_INDEX": "2",
+      "CFEXP_PAPER_PROMPT_SHARD_COUNT": "4",
+      "CFEXP_SDVG_BOUNDED_PROFILE": "0"
+    },
+    "local_path_variables": [
+      "CFEXP_ROLLING_BUDGET_ORIGINAL_RUNS"
+    ],
+    "receipt_variables": [
+      "CFEXP_INSIGHT2_CALIBRATION_RECEIPT_SOURCE",
+      "CFEXP_INSIGHT2_CALIBRATION_RECEIPT_SHA256",
+      "CFEXP_ROLLING_PAPER_PROFILE_PLAN",
+      "CFEXP_ROLLING_PAPER_PROFILE_PLAN_SHA256"
+    ]
+  },
+  "longlive-15": {
+    "source_commit": "2b5222f50204c0f485087a103d20587d68235ad4",
+    "historical_manifest_sha256": "45c846faac548a0d35167be9e72b5473e9c2e801079317736e68b0b2ca501777",
+    "runtime": {
+      "backend": "uv",
+      "python": "3.11",
+      "lockfile": "uv.lock"
+    },
+    "resources": {
+      "gpus": 1,
+      "min_gpu_memory_gb": 135,
+      "cpu": 16,
+      "memory_gb": 192,
+      "expected_duration_minutes": 240
+    },
+    "parameters": {
+      "method": "ours",
+      "nominal_seconds": 15,
+      "generation_seed": 20260911,
+      "target_root": true,
+      "later_target_budget": 4
+    },
+    "entry_module": "cfexp.longlive_matched_main",
+    "options": [
+      "--method",
+      "ours",
+      "--duration-seconds",
+      "15"
+    ],
+    "file_arguments": {
+      "--draft-artifact-spec": "erank3-longlive-policy-v1.artifacts.json",
+      "--target-artifact-spec": "insight2-krea14b.artifacts.json",
+      "--boundary-config": "paper128-longlive-independent-c10-v1.config.json",
+      "--vbench-checkout": null,
+      "--vbench-python": null,
+      "--vbench-asset-manifest": null,
+      "--vbench-asset-spec": "vbench-long-offline-assets-v1.json"
+    },
+    "environment": {
+      "PYTHONUNBUFFERED": "1",
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1",
+      "CFEXP_NATIVE_VIDEO_STREAM_MODEL": "longlive",
+      "CFEXP_ACCEPTED_VIDEO_STREAM": "1",
+      "CFEXP_RENDER_TARGET_PRIORITY": "1",
+      "CFEXP_VIDEO_ONLY_DECODE": "1",
+      "CFEXP_VIDEO_ENCODING": "serial_abr_v1",
+      "OMP_NUM_THREADS": "4",
+      "MKL_NUM_THREADS": "4",
+      "UV_LINK_MODE": "symlink",
+      "CFEXP_NATIVE_SINGLE_GPU": "1",
+      "CFEXP_PAPER_REPRODUCTION": "1",
+      "CFEXP_GENERATION_SEED": "20260911",
+      "CFEXP_PAPER_PROMPT_SHARD_INDEX": "0",
+      "CFEXP_PAPER_PROMPT_SHARD_COUNT": "4",
+      "CFEXP_STAGE_TIMING": "1",
+      "CFEXP_SDVG_TRACKING": "1",
+      "CFEXP_SDVG_BOUNDED_PROFILE": "0",
+      "CFEXP_WANDB_MODE": "auto",
+      "CFEXP_DRAFT_KV_REUSE": "0",
+      "CFEXP_KREA_TIMESTEP_POLICY": "main_comparison_v1",
+      "CFEXP_INSIGHT2_REQUIRE_CALIBRATION_RECEIPT": "1",
+      "CFEXP_LONGLIVE_FUSESTEP": "1",
+      "CFEXP_LONGLIVE_PREFIX_DIAGNOSTIC": "0",
+      "CFEXP_LONGLIVE_HOST_CURSORS": "0",
+      "CFEXP_LONGLIVE_JOINT_HANDOFF_DIAGNOSTIC": "0",
+      "CFEXP_LONGLIVE_JOINT_POLICY_DIAGNOSTIC": "0",
+      "CFEXP_KV_WITNESS_INDEX_REUSE": "0",
+      "CFEXP_LONGLIVE_LATE_HANDOFF_DIAGNOSTIC": "0",
+      "CFEXP_LONGLIVE_CPU_HISTORY_BINDING": "0",
+      "CFEXP_CPU_HISTORY_BINDING": "0",
+      "CFEXP_BATCH_KV_WITNESS": "0",
+      "CFEXP_RANK_INDEX_REUSE": "0",
+      "CFEXP_NATIVE_ROPE_COEFFICIENT_REUSE": "0",
+      "CFEXP_NATIVE_FULL_LENGTH_ATTENTION": "0",
+      "CFEXP_LONGLIVE_ACCEPTED_PREFILL": "0",
+      "CFEXP_ACCEPTED_TARGET_PREFILL": "0",
+      "CFEXP_DRAFT_KV_FORK": "0"
+    },
+    "local_path_variables": [
+      "CFEXP_LONGLIVE_FUSESTEP_GATE_RUN",
+      "CFEXP_LONGLIVE_NORMAL_GATE_RUN"
+    ],
+    "receipt_variables": [
+      "CFEXP_INSIGHT2_CALIBRATION_RECEIPT_SOURCE",
+      "CFEXP_INSIGHT2_CALIBRATION_RECEIPT_SHA256",
+      "CFEXP_LONGLIVE_FULLVIDEO_PREFLIGHT_RUN",
+      "CFEXP_LONGLIVE_FULLVIDEO_PREFLIGHT_PLAN_SHA256"
+    ]
+  },
+  "self-forcing-30": {
+    "source_commit": "4ea5a86b381393575895195ce0ece5df66e89e18",
+    "historical_manifest_sha256": "671fda1e2d1d1325874d7c3effd8ac8e4e2d843d5c61dee451a8e0183e03b66f",
+    "runtime": {
+      "backend": "uv",
+      "python": "3.11",
+      "lockfile": "uv.lock"
+    },
+    "resources": {
+      "gpus": 2,
+      "min_gpu_memory_gb": 75,
+      "cpu": 16,
+      "memory_gb": 192,
+      "expected_duration_minutes": 300
+    },
+    "parameters": {
+      "model_pair": "krea_self_forcing",
+      "seed": 20260911,
+      "nominal_duration_seconds": 30,
+      "chunk_count": 60,
+      "frame_count": 717,
+      "fps": 24,
+      "target_calls": 37,
+      "draft_calls": 23,
+      "burst_length": 4,
+      "observation_horizon": 2,
+      "budget": 36,
+      "accepted_target_prefill": true,
+      "target_burst_denoising_schedules": [
+        [
+          1000.0,
+          250.0
+        ],
+        [
+          1000.0
+        ],
+        [
+          1000.0
+        ],
+        [
+          1000.0
+        ]
+      ],
+      "opening_target_burst": true,
+      "target_early_native_bursts": 2
+    },
+    "entry_module": "cfexp.erank_acceptance_pilot",
+    "options": [
+      "--cohort",
+      "main24_burst",
+      "--arm",
+      "rank_burst4_opening_p2_positive_k36",
+      "--calibration-code-revision",
+      "bea6721ef6d3815d7bc6dff0e44776590b56de5b",
+      "--duration-seconds",
+      "30",
+      "--sealed-calibration-ranks"
+    ],
+    "file_arguments": {
+      "--draft-artifact-spec": "erank-frame-quality-layer-ablation-v1.artifacts.json",
+      "--target-artifact-spec": "insight2-krea14b.artifacts.json",
+      "--boundary-config": "insight2-run-60s-h800-lookahead-boundary-v1.config.json",
+      "--vbench-checkout": null,
+      "--vbench-python": null,
+      "--vbench-asset-manifest": null,
+      "--vbench-asset-spec": "vbench-long-offline-assets-v1.json"
+    },
+    "environment": {
+      "PYTHONUNBUFFERED": "1",
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1",
+      "CFEXP_INSIGHT2_REQUIRE_CALIBRATION_RECEIPT": "1",
+      "CFEXP_DRAFT_KV_REUSE": "1",
+      "CFEXP_DRAFT_KV_FORK": "1",
+      "CFEXP_BOUNDARY_EARLY_REJECT": "0",
+      "CFEXP_STAGE_TIMING": "0",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "CFEXP_VIDEO_ENCODING": "serial_abr_v1",
+      "CFEXP_VIDEO_ONLY_DECODE": "1",
+      "CFEXP_HOST_KV_CURSORS": "1",
+      "CFEXP_ACCEPTED_VIDEO_STREAM": "1",
+      "CFEXP_RENDER_TARGET_PRIORITY": "1",
+      "CFEXP_CPU_HISTORY_BINDING": "1",
+      "CFEXP_NATIVE_ROPE_COEFFICIENT_REUSE": "1",
+      "CFEXP_NATIVE_FULL_LENGTH_ATTENTION": "1",
+      "CFEXP_BATCH_KV_WITNESS": "1",
+      "CFEXP_ACCEPTED_TARGET_PREFILL": "1",
+      "CFEXP_KV_WITNESS_INDEX_REUSE": "1",
+      "CFEXP_RANK_INDEX_REUSE": "1",
+      "CFEXP_SF_TARGET_TWO_STEP": "1",
+      "CFEXP_ACCEPTED_TARGET_PREFILL_BURST_LENGTH": "4",
+      "CFEXP_SF_TARGET_BURST_INTERIOR_ONE_STEP": "1",
+      "CFEXP_SF_TARGET_BURST_EXIT_TWO_STEP": "0",
+      "CFEXP_SF_TARGET_LOW_NOISE_REFINEMENT": "1",
+      "CFEXP_SF_TARGET_EARLY_NATIVE_BURSTS": "2"
+    },
+    "local_path_variables": [],
+    "receipt_variables": [
+      "CFEXP_INSIGHT2_CALIBRATION_RECEIPT_SOURCE",
+      "CFEXP_INSIGHT2_CALIBRATION_RECEIPT_SHA256"
+    ]
+  }
+}

@@ -1,0 +1,398 @@
+{
+  "schema": "insight2_correction_protocol_overlay_v1",
+  "status": "frozen",
+  "base_protocol_file": "paper128-independent-c10-v1.protocol.json",
+  "base_protocol_sha256": "69cf21cef52fcf14d92480619e629dc4408516b2cc48f898558912a77bf96142",
+  "overrides": {
+    "protocol_id": "insight2-correction-long60-h800-lookahead-boundary-v1",
+    "frozen_date": "2026-10-21",
+    "claim_scope": "Rolling Forcing official long-video extension; native accepted-history-bound rolling state and frozen C10 calibration; trained integration must pass before quality claims. Independent paper128 C10 revision: new receipts required; no historical-score equivalence claim.",
+    "design": {
+      "chunk_count": 120,
+      "latent_frame_count": 360,
+      "rgb_frame_count": 1437,
+      "exact_duration_seconds": "479/8",
+      "candidate_chunk_indices": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "seeds": [
+        20260911
+      ],
+      "evaluation_prompt_count": 24,
+      "evaluation_selection": "first_24_base_prompts_in_frozen_source_order",
+      "evaluation_prompt_ids": [
+        "001_subject_consistency_vbl0268",
+        "002_subject_consistency_vbl0276",
+        "003_subject_consistency_vbl0257",
+        "009_background_consistency_vbl0805",
+        "010_background_consistency_vbl0819",
+        "011_background_consistency_vbl0823",
+        "017_temporal_flickering_vbl0042",
+        "018_temporal_flickering_vbl0004",
+        "019_temporal_flickering_vbl0008",
+        "025_motion_smoothness_vbl0291",
+        "026_motion_smoothness_vbl0282",
+        "027_motion_smoothness_vbl0327",
+        "033_dynamic_degree_vbl0309",
+        "034_dynamic_degree_vbl0308",
+        "035_dynamic_degree_vbl0325",
+        "041_aesthetic_quality_vbl0746",
+        "042_aesthetic_quality_vbl0719",
+        "043_aesthetic_quality_vbl0689",
+        "049_imaging_quality_vbl0699",
+        "050_imaging_quality_vbl0757",
+        "051_imaging_quality_vbl0745",
+        "057_object_class_vbl0375",
+        "058_object_class_vbl0331",
+        "059_object_class_vbl0379"
+      ],
+      "smoke_prompt_count": 1,
+      "smoke_selection": "first_1_evaluation_prompt_in_frozen_source_order",
+      "smoke_prompt_ids": [
+        "001_subject_consistency_vbl0268"
+      ]
+    },
+    "risk": {
+      "signal": "causal_trailing_median_relative_erank_drop",
+      "lookback_chunks": 4,
+      "formula": "max(0,(median(previous_at_most_4_draft_eranks)-current_draft_erank)/median(previous_at_most_4_draft_eranks))",
+      "cold_start": "zero_when_no_previous_draft_erank",
+      "history_visibility": "current_and_past_draft_proposals_only",
+      "decision_timing": "after_current_draft_proposal_before_accept_or_target_replace",
+      "direction": "larger_causal_relative_drop_is_higher_risk",
+      "calibration_cdf": "midrank_less_fraction",
+      "lookahead_gate": {
+        "preview_distance_chunks": 1,
+        "guarded_chunk": "pending_draft_t",
+        "signal_chunk": "frontier_draft_t_plus_1",
+        "accept_rule": "commit_pending_and_reuse_frontier_as_next_pending",
+        "reject_rule": "discard_pending_and_frontier_then_target_regenerate_pending_from_last_committed_prefix_with_same_noise",
+        "successor_rule_after_reject": "regenerate_frontier_from_target_corrected_prefix_with_same_noise",
+        "risk_history": "active_branch_committed_draft_ranks_plus_pending_and_frontier",
+        "discarded_branch_history": "audit_only_excluded_from_future_risk",
+        "after_exact_k_budget_exhaustion": "commit_remaining_drafts_without_unused_preview",
+        "terminal_out_of_range_preview": "forbidden"
+      },
+      "boundary_acceptance_gate": {
+        "strategy": "online_lookahead_coverage_boundary_gated",
+        "route_id_template": "online-lookahead-coverage-boundary-gated-erank-drop-k{budget}",
+        "decision_metric_id": "paired_successor_erank_boundary_witness",
+        "decision_metric_version": "v1",
+        "proposal_semantics": {
+          "proposal_opportunity_budget": 6,
+          "controller_action": "open_target_proposal_opportunity",
+          "proposed_target_chunks": "exactly_6_controller_selected_chunks_one_per_frozen_window",
+          "accepted_target_chunks": "ordered_subset_of_proposed_target_chunks",
+          "rejected_target_chunks": "ordered_complement_within_proposed_target_chunks",
+          "opportunity_consumption": "every_materialized_target_candidate_consumes_one_opportunity_regardless_of_acceptance"
+        },
+        "same_noise_branches": {
+          "pending_and_target_chunk_t": "same_noise_t",
+          "draft_and_target_successor_chunk_t_plus_1": "same_noise_t_plus_1"
+        },
+        "erank_dominance": {
+          "metric": "target_conditioned_successor_erank_minus_draft_conditioned_successor_erank",
+          "threshold": 0,
+          "comparison": "greater_than_or_equal",
+          "equality": "pass"
+        },
+        "boundary_dominance": {
+          "result_field": "boundary_velocity_witness",
+          "witness_schema": "correction_boundary_velocity_witness_v1",
+          "metric_id": "latent_velocity_transition_discontinuity_v1",
+          "chunk_zero_witness": null,
+          "witness_fields": [
+            "schema",
+            "metric_id",
+            "accumulator_dtype",
+            "round_decimals",
+            "input_dtype",
+            "history_frame_count",
+            "candidate_frame_count",
+            "previous_velocity_norm",
+            "boundary_velocity_norm",
+            "candidate_velocity_norm",
+            "incoming_discontinuity",
+            "outgoing_discontinuity",
+            "score"
+          ],
+          "latent_layout": "batch_time_channels_height_width",
+          "accumulator_dtype": "float64",
+          "adjacent_frames_only": true,
+          "previous_velocity": "history_last_minus_history_penultimate",
+          "boundary_velocity": "candidate_first_minus_history_last",
+          "candidate_velocity": "candidate_second_minus_candidate_first",
+          "distance_formula": "l2_norm_a_minus_b_divided_by_l2_norm_a_plus_l2_norm_b",
+          "both_zero_distance": 0,
+          "incoming": "distance_previous_velocity_boundary_velocity",
+          "outgoing": "distance_boundary_velocity_candidate_velocity",
+          "score": "max_incoming_outgoing",
+          "round_decimals": 12,
+          "comparison_operands": "rounded_12_decimal_witness_components",
+          "entry_metric": "target_candidate_witness_score_minus_pending_draft_witness_score",
+          "exit_metric": "target_conditioned_successor_witness_score_minus_draft_conditioned_successor_witness_score",
+          "entry_threshold": 0,
+          "exit_threshold": 0,
+          "comparison": "less_than_or_equal",
+          "equality": "pass",
+          "all_components_required": true
+        },
+        "accept_rule": "accept_target_only_when_erank_and_boundary_paired_dominance_both_pass",
+        "accept_transition": "commit_target_discard_pending_draft_and_draft_frontier_and_carry_target_conditioned_successor",
+        "reject_transition": "commit_pending_draft_reuse_draft_frontier_and_discard_target_candidate_and_target_conditioned_successor",
+        "discarded_branch_history": "audit_only_excluded_from_future_risk",
+        "threshold_source": "preregistered_zero_paired_dominance",
+        "old_smoke_tuning": "forbidden"
+      }
+    },
+    "quality": {
+      "primary": "vbench_long_custom_six_dimension_macro_mean",
+      "implementation": "official_vbench_long",
+      "mode": "long_custom_input",
+      "dimensions": [
+        "subject_consistency",
+        "background_consistency",
+        "motion_smoothness",
+        "dynamic_degree",
+        "aesthetic_quality",
+        "imaging_quality"
+      ],
+      "aggregation": "unweighted_arithmetic_mean_of_six_official_dimension_scores",
+      "dimension_scores_reported_separately": true,
+      "full_video_frames": "all_1437_frames",
+      "codec_input_for_scoring": true
+    },
+    "multi_budget": {
+      "budgets": [
+        6
+      ],
+      "random_repeats": 0,
+      "strategies": [
+        "uniform",
+        "online_lookahead_coverage_guided",
+        "online_lookahead_coverage_boundary_gated"
+      ],
+      "uniform_rule": "round_half_up_chunk_count_times_j_over_K_plus_1",
+      "uniform_positions": {
+        "6": [
+          17,
+          34,
+          51,
+          69,
+          86,
+          103
+        ]
+      },
+      "coverage_constraint": {
+        "anchor_rule": "round_half_up_chunk_count_times_j_over_K_plus_1",
+        "anchors": {
+          "6": [
+            17,
+            34,
+            51,
+            69,
+            86,
+            103
+          ]
+        },
+        "window_radius_chunks": 4,
+        "windows": {
+          "6": [
+            [
+              13,
+              21
+            ],
+            [
+              30,
+              38
+            ],
+            [
+              47,
+              55
+            ],
+            [
+              65,
+              73
+            ],
+            [
+              82,
+              90
+            ],
+            [
+              99,
+              107
+            ]
+          ]
+        },
+        "selection_per_window": 1,
+        "minimum_gap_chunks": 8,
+        "maximum_gap_chunks": 20,
+        "dynamic_eligibility_rule": "max(static_window_start,last_target_chunk_plus_minimum_gap)",
+        "dynamic_deadline_rule": "min(static_window_end,last_target_chunk_plus_maximum_gap)",
+        "threshold_quantile_method": "higher",
+        "threshold_probability": "one_minus_one_over_remaining_eligible_slots_through_deadline",
+        "history_visibility": "current_and_past_draft_proposals_only",
+        "emergency_override": "none",
+        "age_bonus": "none"
+      },
+      "lookahead_constraint": {
+        "controller": "same_frozen_coverage_controller",
+        "risk_source": "one_chunk_frontier_preview",
+        "commit_lag_chunks": 1,
+        "target_budget": "chunk_zero_plus_exactly_6_replacements",
+        "latest_possible_final_correction_chunk": 107,
+        "preview_after_budget_exhaustion": false
+      },
+      "boundary_gated_constraint": {
+        "controller": "same_frozen_coverage_controller",
+        "proposal_opportunity_budget": 6,
+        "proposal_opportunities": "exactly_one_per_frozen_window",
+        "budget_accounting": "proposal_opportunities_not_acceptances",
+        "target_call_budget": "shared_chunk_zero_plus_exactly_6_target_proposal_calls",
+        "proposed_target_chunks": "exactly_6",
+        "accepted_target_chunks": "ordered_subset_size_0_through_6",
+        "latest_possible_final_proposal_chunk": 107,
+        "preview_after_proposal_budget_exhaustion": false,
+        "route_revision": "same_exact_git_sha_for_all_three_routes"
+      },
+      "oracle": "not_in_scope"
+    },
+    "analysis": {
+      "random_multi_budget": "not_applicable_three_deterministic_routes_only",
+      "primary_contrast": "online_lookahead_coverage_boundary_gated_minus_online_lookahead_coverage_guided_and_online_lookahead_coverage_boundary_gated_minus_uniform",
+      "comparison_controls": {
+        "code_revision": "same_exact_git_sha",
+        "prompt_seed": "same_frozen_prompt_and_seed",
+        "model_artifacts": "same_digest_pinned_draft_and_target",
+        "chunk_noise": "same_prompt_seed_chunk_noise_per_absolute_chunk",
+        "scorer": "same_official_vbench_long_six_dimension_contract"
+      }
+    },
+    "models": {
+      "draft": {
+        "id": "rolling_forcing_1.3b",
+        "native_cache_policy": "native_rolling_accepted_history_bound_future_state",
+        "checkpoint_role": "rolling_ema_longvideo"
+      },
+      "branch_cache_policy": "model_specific_history_bound_incremental_cache"
+    }
+  }
+}

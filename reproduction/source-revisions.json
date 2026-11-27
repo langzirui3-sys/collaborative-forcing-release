@@ -1,0 +1,35 @@
+{
+  "rolling-15": {
+    "source_commit": "370b986a257787bbd18fd3763400fc3875daf1c9",
+    "configurations": [
+      "experiments/erank3-rolling-native-v1.artifacts.json",
+      "experiments/insight2-krea14b.artifacts.json",
+      "experiments/paper128-rolling-independent-c10-boundary-v1.protocol.json",
+      "experiments/paper128-rolling-independent-c10-v1.config.json",
+      "experiments/vbench-long-offline-assets-v1.json"
+    ],
+    "source_files": 288
+  },
+  "longlive-15": {
+    "source_commit": "2b5222f50204c0f485087a103d20587d68235ad4",
+    "configurations": [
+      "experiments/erank3-longlive-policy-v1.artifacts.json",
+      "experiments/insight2-krea14b.artifacts.json",
+      "experiments/paper128-longlive-independent-c10-boundary-v1.protocol.json",
+      "experiments/paper128-longlive-independent-c10-v1.config.json",
+      "experiments/vbench-long-offline-assets-v1.json"
+    ],
+    "source_files": 277
+  },
+  "self-forcing-30": {
+    "source_commit": "4ea5a86b381393575895195ce0ece5df66e89e18",
+    "configurations": [
+      "experiments/erank-frame-quality-layer-ablation-v1.artifacts.json",
+      "experiments/insight2-correction-long60-h800-lookahead-boundary-v1.protocol.json",
+      "experiments/insight2-krea14b.artifacts.json",
+      "experiments/insight2-run-60s-h800-lookahead-boundary-v1.config.json",
+      "experiments/vbench-long-offline-assets-v1.json"
+    ],
+    "source_files": 212
+  }
+}

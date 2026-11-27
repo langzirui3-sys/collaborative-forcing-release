@@ -1,0 +1,34 @@
+{
+  "schema": "insight2_run_config_v3",
+  "status": "frozen",
+  "protocol": "experiments/paper128-longlive-independent-c10-boundary-v1.protocol.json",
+  "draft_artifact_spec": "experiments/erank3-longlive-policy-v1.artifacts.json",
+  "target_artifact_spec": "experiments/insight2-krea14b.artifacts.json",
+  "gpu_roles": {
+    "draft": 0,
+    "target": 1
+  },
+  "runtime_acceleration": {
+    "shared_precomputed_umt5_conditioning": true,
+    "allow_draft_target_same_gpu": false
+  },
+  "coverage_constraint": {
+    "window_radius_chunks": 4,
+    "min_gap_chunks": 8,
+    "max_gap_chunks": 20
+  },
+  "multi_budget": {
+    "budgets": [
+      6
+    ],
+    "random_repeats": 0,
+    "strategies": [
+      "uniform",
+      "online_lookahead_coverage_guided",
+      "online_lookahead_coverage_boundary_gated"
+    ]
+  },
+  "analysis": {
+    "bootstrap_replicates": 10000
+  }
+}

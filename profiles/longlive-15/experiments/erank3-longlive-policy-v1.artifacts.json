@@ -1,0 +1,180 @@
+{
+  "schema": "main_table_baseline_artifacts_v1",
+  "status": "frozen",
+  "method_id": "draft_only",
+  "adapter_module": "cfexp.longlive_adapter",
+  "adapter_config": {
+    "schema": "longlive_adapter_config_v1",
+    "official_source_commit": "2aa857f595d35c81526938d603ae7b1082922ac6",
+    "source_archive_artifact": "longlive_source",
+    "source_archive_subdirectory": "LongLive-2aa857f595d35c81526938d603ae7b1082922ac6/LongLive1.0",
+    "runtime_files": [
+      {
+        "artifact": "wan_model_config",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/config.json"
+      },
+      {
+        "artifact": "wan_model_configuration",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/configuration.json"
+      },
+      {
+        "artifact": "wan_model_weights",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/diffusion_pytorch_model.safetensors"
+      },
+      {
+        "artifact": "wan_vae_checkpoint",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/Wan2.1_VAE.pth"
+      },
+      {
+        "artifact": "wan_t5_checkpoint",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/models_t5_umt5-xxl-enc-bf16.pth"
+      },
+      {
+        "artifact": "umt5_special_tokens_map",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/google/umt5-xxl/special_tokens_map.json"
+      },
+      {
+        "artifact": "umt5_spiece_model",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/google/umt5-xxl/spiece.model"
+      },
+      {
+        "artifact": "umt5_tokenizer_json",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/google/umt5-xxl/tokenizer.json"
+      },
+      {
+        "artifact": "umt5_tokenizer_config",
+        "destination": "wan_models/Wan2.1-T2V-1.3B/google/umt5-xxl/tokenizer_config.json"
+      }
+    ],
+    "generation": {
+      "checkpoint_artifact": "longlive_base",
+      "checkpoint_state_key": "generator",
+      "dtype": "bfloat16",
+      "model_id": "Wan2.1-T2V-1.3B",
+      "noise_shape": [
+        360,
+        16,
+        60,
+        104
+      ],
+      "rgb_frames": 1437,
+      "fps": 24,
+      "num_frame_per_block": 3,
+      "denoising_step_list": [
+        1000,
+        750,
+        500,
+        250
+      ],
+      "warp_denoising_step": true,
+      "context_noise": 0,
+      "model_kwargs": {
+        "local_attn_size": 12,
+        "timestep_shift": 5.0,
+        "sink_size": 3
+      },
+      "lora_artifact": "longlive_lora"
+    },
+    "runtime_wheel_artifact": "flash_attn_wheel"
+  },
+  "artifacts": [
+    {
+      "name": "wan_model_config",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/config.json",
+      "sha256": "ab37994c43740513f94b3ba6233a784035a67b43c8cde83c8f31aa90468c67ce",
+      "role": "base_model_file"
+    },
+    {
+      "name": "wan_model_configuration",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/configuration.json",
+      "sha256": "745e37f6bb62f8a294ed12e44ffe4733bd2259d6f7029939f1297cd1b226fa4f",
+      "role": "base_model_file"
+    },
+    {
+      "name": "wan_model_weights",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/diffusion_pytorch_model.safetensors",
+      "sha256": "96b6b242ca1c2f24e9d02cd6596066fab6d310e2d7538f33ae267cb18d957e8f",
+      "role": "base_model_file"
+    },
+    {
+      "name": "wan_vae_checkpoint",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/Wan2.1_VAE.pth",
+      "sha256": "38071ab59bd94681c686fa51d75a1968f64e470262043be31f7a094e442fd981",
+      "role": "base_model_file"
+    },
+    {
+      "name": "wan_t5_checkpoint",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/models_t5_umt5-xxl-enc-bf16.pth",
+      "sha256": "7cace0da2b446bbbbc57d031ab6cf163a3d59b366da94e5afe36745b746fd81d",
+      "role": "base_model_file"
+    },
+    {
+      "name": "umt5_special_tokens_map",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/google/umt5-xxl/special_tokens_map.json",
+      "sha256": "7b8a9f5040adb67b5805abdfd42c1f8d0f3d0e711f10726580eb3789cd0ad61d",
+      "role": "base_model_file"
+    },
+    {
+      "name": "umt5_spiece_model",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/google/umt5-xxl/spiece.model",
+      "sha256": "e3909a67b780650b35cf529ac782ad2b6b26e6d1f849d3fbb6a872905f452458",
+      "role": "base_model_file"
+    },
+    {
+      "name": "umt5_tokenizer_json",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/google/umt5-xxl/tokenizer.json",
+      "sha256": "6e197b4d3dbd71da14b4eb255f4fa91c9c1f2068b20a2de2472967ca3d22602b",
+      "role": "base_model_file"
+    },
+    {
+      "name": "umt5_tokenizer_config",
+      "root": "model",
+      "path": "hf/Wan-AI/Wan2.1-T2V-1.3B/37ec512624d61f7aa208f7ea8140a131f93afc9a/google/umt5-xxl/tokenizer_config.json",
+      "sha256": "ed9a3a8b0faa71a70a32847e0435fe036e6e112d4df4edb7bb48a921e344dc05",
+      "role": "base_model_file"
+    },
+    {
+      "name": "longlive_source",
+      "root": "model",
+      "path": "four-pair-v1/NVlabs/LongLive/2aa857f595d35c81526938d603ae7b1082922ac6/source.tar.gz",
+      "sha256": "e5f24ebb06ed0971179d3cc6f174d1f914ad58acd07be86d266a437e04798d20",
+      "role": "official_source_archive"
+    },
+    {
+      "name": "longlive_base",
+      "root": "model",
+      "path": "four-pair-v1/Efficient-Large-Model/LongLive-1.3B/cda9138d93872ef109d9a74c270184eb3a5acc6e/models/longlive_base.pt",
+      "sha256": "10a2aa8fcf89c77d9033f4c117405412a690e289625766619d293f0c5a208ee7",
+      "role": "generator_checkpoint"
+    },
+    {
+      "name": "longlive_lora",
+      "root": "model",
+      "path": "four-pair-v1/Efficient-Large-Model/LongLive-1.3B/cda9138d93872ef109d9a74c270184eb3a5acc6e/models/lora.pt",
+      "sha256": "c4e43b87d62d4b0614b496773639f1ab170a7ee486dc23407901e9d3a5ebc07a",
+      "role": "generator_checkpoint"
+    },
+    {
+      "name": "flash_attn_wheel",
+      "root": "model",
+      "path": "runtime-wheels/flash_attn-2.8.3+cu12torch2.5cxx11abiFALSE-cp311-cp311-linux_x86_64.whl",
+      "sha256": "ca5a5614530bad3bcaf936917d53a6d60c9057d1218030efe3ca588cb4f4ebb6",
+      "role": "binary_runtime_wheel"
+    },
+    {
+      "name": "musiq_spaq_checkpoint",
+      "root": "model",
+      "path": "metrics/musiq/musiq_spaq_ckpt-358bb6af.pth",
+      "sha256": "358bb6af275e28ea56821d44fb55c6cb83645db11f394d3ad65b2d149965ab50",
+      "role": "single_frame_quality_scorer"
+    }
+  ]
+}

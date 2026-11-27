@@ -1,0 +1,19 @@
+# Frozen inference overrides for the 15-second frame/eRank pilot.
+# These values are merged over official Self-Forcing's configs/default_config.yaml.
+denoising_step_list:
+  - 1000
+  - 750
+  - 500
+  - 250
+warp_denoising_step: true
+num_frame_per_block: 3
+independent_first_frame: false
+context_noise: 0
+causal: true
+i2v: false
+same_step_across_blocks: true
+model_kwargs:
+  model_name: Wan2.1-T2V-1.3B
+  timestep_shift: 5.0
+  local_attn_size: 21
+  sink_size: 0

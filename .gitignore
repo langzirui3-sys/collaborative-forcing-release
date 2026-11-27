@@ -1,0 +1,12 @@
+__pycache__/
+.venv/
+*.pyc
+.env
+*.pt
+*.pth
+*.safetensors
+*.ckpt
+*.mp4
+*.mov
+wandb/
+dist/
