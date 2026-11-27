@@ -1,34 +1,46 @@
-# Collaborative Forcing
+<h1 align="center">Collaborative Forcing</h1>
 
-**eRank-Guided Burst Scheduling for Autoregressive Video Generation**
+<p align="center">
+  <strong>eRank-Guided Burst Scheduling for Autoregressive Video Generation</strong>
+</p>
 
-RankPulse schedules short bursts from a stronger Target using signals from
-already committed Draft chunks. StateBridge resumes from the accepted
-history, and FuseStep combines the missing-history prefill with the first
+<p align="center">
+  Zirui Lang · Xijun Wang · Wenbiao Zhao · Runzhong Qiao<br>
+  Saining Zhang <em>(Corresponding author)</em>
+</p>
+
+<p align="center">
+  <a href="https://langzirui3-sys.github.io/collaborative-forcing-project/"><strong>Project page</strong></a> ·
+  <a href="https://langzirui3-sys.github.io/collaborative-forcing-project/paper.pdf"><strong>Paper</strong></a> ·
+  <a href="https://langzirui3-sys.github.io/collaborative-forcing-project/demo.html"><strong>Video comparisons</strong></a> ·
+  <a href="#quick-start"><strong>Quick start</strong></a>
+</p>
+
+<p align="center">
+  <strong>1.84–2.21×</strong> video-ready speedup over matched Target-only runs on one H200
+</p>
+
+<p align="center">
+  <a href="https://langzirui3-sys.github.io/collaborative-forcing-project/assets/method.pdf">
+    <img src="https://langzirui3-sys.github.io/collaborative-forcing-project/assets/method.webp" width="860"
+      alt="Method overview with a video filmstrip, RankPulse routing, StateBridge cache handoff, and FuseStep execution">
+  </a>
+  <br>
+  <sub>Method overview · Select the figure to open its vector PDF.</sub>
+</p>
+
+A small Draft model generates most of the video. RankPulse uses Draft eRank to schedule
+future bursts from the stronger Target. StateBridge preserves valid Draft KV
+state, and FuseStep combines the missing-history prefill with the first
 resumed Draft denoising step.
 
-[Project page](https://langzirui3-sys.github.io/collaborative-forcing-project/) ·
-[Preprint](https://langzirui3-sys.github.io/collaborative-forcing-project/paper.pdf) ·
-[Video comparisons](https://langzirui3-sys.github.io/collaborative-forcing-project/demo.html)
+The paper compares three Draft backends at 15 and 30 seconds. Video-ready
+time includes generation, decoding, and encoding. [Paper, Table 1](https://langzirui3-sys.github.io/collaborative-forcing-project/paper.pdf)
 
-## Release profiles
+## Quick start
 
-| Profile | Duration | Draft cache and Target budget |
-| --- | ---: | --- |
-| `rolling-15` | 15 s | Native rolling cache, one Target root and four later Target blocks |
-| `longlive-15` | 15 s | Native LongLive cache with FuseStep, one Target root and four later Target blocks |
-| `self-forcing-30` | 30 s | Native incremental Self-Forcing KV reuse, 37 Target blocks including the root |
-
-Each profile ships its own source snapshot and frozen dependency lock.
-`reproduction/source-revisions.json` records the archived source revisions.
-`reproduction/profiles.json` records the historical run settings, entry
-modules, and runtime inputs. The source package metadata uses Apache-2.0.
-Machine-local publication defaults and private archival tools were removed
-from the exported copies.
-
-## Install and check the method
-
-Use Python 3.11 or 3.12 and [uv](https://docs.astral.sh/uv/).
+Start with Rolling Forcing to install the frozen dependencies and run the
+method checks. Use Python 3.11 or 3.12. [Install uv](https://docs.astral.sh/uv/)
 
 ```sh
 git clone https://github.com/langzirui3-sys/collaborative-forcing-release.git
@@ -38,42 +50,71 @@ uv run --frozen python -m unittest discover -s tests -v
 uv run --frozen python -m cfexp.rolling_budget.paper_main --help
 ```
 
-The included tests exercise causal burst selection, accepted-history
-binding, and the stream interfaces with portable fixtures. Backend tests
-that use PyTorch run when PyTorch is present. Install each profile in its
-own environment. The `longlive-15` and `self-forcing-30` entry modules are
-`cfexp.longlive_matched_main` and `cfexp.erank_acceptance_pilot`, respectively.
+The tests run on CPU with portable fixtures for causal burst selection,
+accepted-history binding, and the stream interfaces. The backend cache
+tests use CPU PyTorch when it is installed.
 
-## GPU inputs and experiment settings
+## Release profiles
 
-For an inference environment, use the pinned Linux x86-64 and Python 3.11
-dependencies in the selected profile. The model specifications list the
-upstream revisions, relative local paths, and SHA256 checks for the Draft
-and Krea Target files. Obtain the model sources and checkpoints from their
-providers under their respective terms. [Causal Forcing](https://github.com/thu-ml/Causal-Forcing) ·
+| Source profile | Draft cache | Target blocks |
+| --- | --- | --- |
+| [Rolling Forcing · 15 s](profiles/rolling-15/) | Native rolling KV | One root and four later blocks |
+| [LongLive · 15 s](profiles/longlive-15/) | Native LongLive KV with FuseStep | One root and four later blocks |
+| [Self-Forcing · 30 s](profiles/self-forcing-30/) | Native incremental Draft KV | 37 blocks including the root |
+
+Install each source snapshot in its own environment with its frozen lock.
+The LongLive and Self-Forcing entry modules are `cfexp.longlive_matched_main`
+and `cfexp.erank_acceptance_pilot`. [Recorded settings](reproduction/profiles.json) ·
+[Source revisions](reproduction/source-revisions.json)
+
+To inspect the implementation, start with the causal scheduler, accepted
+history representation, and LongLive joint executor. [RankPulse](profiles/rolling-15/src/cfexp/rank_burst.py) ·
+[StateBridge](profiles/rolling-15/src/cfexp/correction_state.py) ·
+[FuseStep](profiles/longlive-15/src/cfexp/longlive_joint_executor.py)
+
+## GPU reproduction
+
+Use the pinned Linux x86-64 and Python 3.11 dependencies in the selected
+profile. The artifact specifications give the upstream revisions,
+relative paths, and SHA256 values for the Draft and Krea Target files.
+Obtain the sources and checkpoints from their providers. [Causal Forcing](https://github.com/thu-ml/Causal-Forcing) ·
 [LongLive](https://github.com/NVlabs/LongLive) · [Self-Forcing](https://github.com/guandeh17/Self-Forcing) ·
 [Krea Realtime 14B](https://github.com/krea-ai/realtime-video)
 
-From the repository root, check the model files against the selected
-profile's exact artifact specifications.
+Check the model files from the repository root.
 
 ```sh
 python3 reproduction/check_assets.py rolling-15 --model-root /path/to/models
 ```
 
-The profile JSON lists machine-local inputs by name. Replace the file
-argument placeholders with your own paths and use a separate
-`CFEXP_RUN_DIR` for generated output. The original benchmark entry
-modules enforce sealed calibration and hardware-specific admission
-records. Those records and the evaluation population belong to the
-research environment. A new GPU reproduction needs its own validated
-environment and upstream evaluator assets. Before a new cohort, run a
-bounded warm-up and profile, and track the run with W&B using your own
-credentials or offline mode. This release was checked locally with CPU
-tests and entry-point checks. End-to-end GPU execution in an external
-environment remains unverified.
+Supply the local paths listed in the recorded settings and use a separate
+`CFEXP_RUN_DIR` for generation outputs. The historical benchmark drivers
+require sealed calibration and hardware-specific admission records. A new
+GPU reproduction needs validated local inputs and the upstream evaluator
+assets. Profile a bounded workload after warm-up, and track the cohort
+with W&B using your own credentials or offline mode.
+
+All 350 release test cases passed in local CPU environments, including the
+Rolling Forcing and LongLive cache checks with CPU PyTorch. External
+end-to-end GPU generation remains unverified.
+
+## Citation
+
+<details>
+<summary>BibTeX</summary>
+
+```bibtex
+@misc{lang2026collaborativeforcing,
+  title  = {Collaborative Forcing: eRank-Guided Burst Scheduling for Autoregressive Video Generation},
+  author = {Lang, Zirui and Wang, Xijun and Zhao, Wenbiao and Qiao, Runzhong and Zhang, Saining},
+  year   = {2026},
+  url    = {https://langzirui3-sys.github.io/collaborative-forcing-project/}
+}
+```
+
+</details>
 
 ## License
 
-Apache-2.0 covers the project source and included documentation. See
-`THIRD_PARTY.md` and the preserved source headers for upstream attribution.
+The project source and included documentation use Apache-2.0.
+[License](LICENSE) · [Third-party attribution](THIRD_PARTY.md)
