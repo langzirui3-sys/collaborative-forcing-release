@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://langzirui3-sys.github.io/collaborative-forcing-project/"><strong>Project page</strong></a> ·
   <a href="https://langzirui3-sys.github.io/collaborative-forcing-project/paper.pdf"><strong>Paper</strong></a> ·
-  <a href="https://langzirui3-sys.github.io/collaborative-forcing-project/demo.html"><strong>Video comparisons</strong></a> ·
+  <a href="#teaser"><strong>Teaser</strong></a> ·
   <a href="#quick-start"><strong>Quick start</strong></a>
 </p>
 
@@ -36,6 +36,17 @@ resumed Draft denoising step.
 
 The paper compares three Draft backends at 15 and 30 seconds. Video-ready
 time includes generation, decoding, and encoding. [Paper, Table 1](https://langzirui3-sys.github.io/collaborative-forcing-project/paper.pdf)
+
+## Teaser
+
+<p align="center">
+  <a href="https://langzirui3-sys.github.io/collaborative-forcing-project/#teaser">
+    <img src="https://langzirui3-sys.github.io/collaborative-forcing-project/assets/project-teaser.webp" width="640"
+      alt="Play the 78-second Collaborative Forcing project teaser">
+  </a>
+  <br>
+  <a href="https://langzirui3-sys.github.io/collaborative-forcing-project/#teaser"><strong>Play the teaser · 1:18</strong></a>
+</p>
 
 ## Quick start
 
