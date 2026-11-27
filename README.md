@@ -5,8 +5,13 @@
 </p>
 
 <p align="center">
-  Zirui Lang · Xijun Wang · Wenbiao Zhao · Runzhong Qiao<br>
-  Saining Zhang <em>(Corresponding author)</em>
+  Zirui Lang<sup>1</sup> · Xijun Wang<sup>2</sup> · Wenbiao Zhao<sup>3</sup> · Runzhong Qiao<sup>4</sup><br>
+  Saining Zhang<sup>5</sup> <em>(Corresponding author)</em>
+</p>
+
+<p align="center">
+  <sub><sup>1</sup> Beijing Institute of Technology · <sup>2</sup> University of Science and Technology of China<br>
+  <sup>3</sup> Xinjiang University · <sup>4</sup> Tsinghua University · <sup>5</sup> Nanyang Technological University</sub>
 </p>
 
 <p align="center">
@@ -19,6 +24,17 @@
 <p align="center">
   <strong>1.84–2.21×</strong> video-ready speedup over matched Target-only runs on one H200
 </p>
+
+<p align="center">
+  <a href="https://langzirui3-sys.github.io/collaborative-forcing-project/paper.pdf">
+    <img src="docs/paper-cover.webp" width="860"
+      alt="Preprint Figure 1 with four generated video examples and the matched 30-second Rolling Forcing comparison">
+  </a>
+  <br>
+  <sub>Figure 1 from the preprint · Select the figure to open the paper.</sub>
+</p>
+
+## Method
 
 <p align="center">
   <a href="https://langzirui3-sys.github.io/collaborative-forcing-project/assets/method.pdf">
