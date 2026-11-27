@@ -5,8 +5,9 @@
 </p>
 
 <p align="center">
-  Zirui Lang<sup>1</sup> · Xijun Wang<sup>2</sup> · Wenbiao Zhao<sup>3</sup> · Runzhong Qiao<sup>4</sup><br>
-  Saining Zhang<sup>5</sup> <em>(Corresponding author)</em>
+  Zirui Lang<sup>1,*</sup> · Xijun Wang<sup>2,*</sup> · Wenbiao Zhao<sup>3</sup> · Runzhong Qiao<sup>4</sup><br>
+  Saining Zhang<sup>5</sup> <em>(Corresponding author)</em><br>
+  <sub>* Equal contribution</sub>
 </p>
 
 <p align="center">
